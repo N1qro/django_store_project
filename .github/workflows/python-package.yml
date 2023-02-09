@@ -29,6 +29,17 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install flake8
         pip install -r requirements.txt
+    - name: black formatter
+      uses: rickstaa/action-black@v1.3.0
+      with:
+        fail_on_error: false
+        black_args: ". --check"
+    - name: flake8 Lint
+      uses: py-actions/flake8@v2
+      with:
+        max-line-length: "80"
+        plugins: "pep8-naming flake8-quotes flake8-import-order"
+        
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names

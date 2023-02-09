@@ -1,4 +1,5 @@
 # Тестовый проект веб приложения на Django
+![Main check](https://github.com/N1qro/django_store_project/actions/workflows/python-package.yml/badge.svg?branch=main)  
 ### Инструкция по запуске в dev режиме на WINDOWS:
 
 > 1. Перед первым запуском создаём окружение через ***"env-creator.bat"***

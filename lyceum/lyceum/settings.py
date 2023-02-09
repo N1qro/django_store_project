@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import json
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,15 +20,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    "django-insecure-p@3pt0u#i(y47f4bgd&zgkq6*^-!%q(l*v7cf6o=&3cbd=v8ko"
-)
+try:
+    with open(".env/settings.json") as jsonFile:
+        SECRETS = json.load(jsonFile)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+    SECRET_KEY = SECRETS["SECRET_KEY"]
+    DEBUG = SECRETS["DEBUG"]
+    ALLOWED_HOSTS = SECRETS["ALLOWED_HOSTS"]
+except FileNotFoundError:
+    raise FileNotFoundError("settings.json file is not found in .env folder")
+except KeyError:
+    raise KeyError("Some entries in settings.json file are missing. Fill them in please.")
 
 
 # Application definition

@@ -21,8 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 try:
-    with open(".env/settings.json") as jsonFile:
-        SECRETS = json.load(jsonFile)
+    with open(".env/settings.json") as json_file:
+        SECRETS = json.load(json_file)
 
     SECRET_KEY = SECRETS["SECRET_KEY"]
     DEBUG = SECRETS["DEBUG"]

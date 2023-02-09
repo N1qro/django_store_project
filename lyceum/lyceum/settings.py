@@ -30,7 +30,9 @@ try:
 except FileNotFoundError:
     raise FileNotFoundError("settings.json file is not found in .env folder")
 except KeyError:
-    raise KeyError("Some entries in settings.json file are missing. Fill them in please.")
+    raise KeyError(
+        "Some entries in settings.json file are missing. Fill them in please."
+    )
 
 
 # Application definition

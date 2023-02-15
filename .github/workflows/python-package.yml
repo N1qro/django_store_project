@@ -37,7 +37,7 @@ jobs:
         echo SECRET_KEY="${{ secrets.SECRET_KEY }}" >> .env
         echo DEBUG="${{ secrets.DEBUG }}" >> .env
         echo ALLOWED_HOSTS="${{ secrets.ALLOWED_HOSTS }}" >> .env
-        echo ENABLE_COFFEE_MIDDLEWARE="${{ secrets.COFFEE_MIDWARE }}" >> .env
+        echo ENABLE_COFFEE_MIDDLEWARE="${{ env.COFFEE_MIDWARE }}" >> .env
     - name: black formatter
       uses: rickstaa/action-black@v1.3.0
       with:

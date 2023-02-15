@@ -48,5 +48,6 @@ jobs:
         plugins: "pep8-naming flake8-quotes flake8-import-order"    
     - name: Run Django Tests
       run: |
+        cd lyceum
         python manage.py test
         

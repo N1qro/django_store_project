@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Lint/Black testing
+name: Lint/Black/Django testing
 
 on:
   push:
@@ -41,5 +41,6 @@ jobs:
         plugins: "pep8-naming flake8-quotes flake8-import-order"    
     - name: Run Django Tests
       run: |
+        cd lyceum
         python manage.py test
         

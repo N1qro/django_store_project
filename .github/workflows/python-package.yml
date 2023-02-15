@@ -5,7 +5,7 @@ name: Lint/Black testing
 
 on:
   push:
-    branches: [ "main", "development"]
+    branches: [ "main", "development", "temp"]
   pull_request:
     branches: [ "main" ]
 

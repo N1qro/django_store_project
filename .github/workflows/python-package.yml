@@ -29,6 +29,13 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install flake8
         pip install -r requirements.txt
+    - name: Create .env file
+      run: |
+        cd lyceum
+        touch .env
+        echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
+        echo DEBUG=${{ secrets.DEBUG }}
+        echo ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}
     - name: black formatter
       uses: rickstaa/action-black@v1.3.0
       with:

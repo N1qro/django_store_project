@@ -1,8 +1,8 @@
-from django.urls import re_path, path, register_converter
+from django.urls import path, re_path, register_converter
 
 from . import converters, views
 
-register_converter(converters.PositiveInteger, 'int+')
+register_converter(converters.PositiveInteger, "int+")
 
 urlpatterns = [
     path("", views.item_list),

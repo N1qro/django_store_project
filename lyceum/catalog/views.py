@@ -10,4 +10,4 @@ def item_detail(request, pk):
 
 
 def regex_page_view(request):
-    return HttpResponse('<body>Вы ввели целое положительное число!</body>')
+    return HttpResponse("<body>Вы ввели целое положительное число!</body>")

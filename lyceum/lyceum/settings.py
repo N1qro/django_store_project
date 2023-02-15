@@ -21,8 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = bool(os.getenv("DEBUG"))
+DEBUG = os.getenv("DEBUG") in ("True")
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
+ENABLE_COFFEE_MIDDLEWARE = os.getenv("ENABLE_COFFEE_MIDDLEWARE") in ("True")
 
 # Application definition
 
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "joke.middleware.reverse_response.ResponseReverser",
 ]
 
 INTERNAL_IPS = ["127.0.0.1"]

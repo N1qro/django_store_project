@@ -23,9 +23,3 @@ class ResponseReverser:
 
     def transform_string(self, string):
         return string.decode("UTF-8").strip("</body>")
-
-    @classmethod
-    def as_middleware(cls, *args, **kwargs):
-        def middleware(get_response):
-            return cls(get_response, *args, **kwargs)
-        return middleware

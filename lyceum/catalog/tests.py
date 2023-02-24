@@ -1,7 +1,8 @@
-from catalog import models
 from django.core import exceptions
 from django.test import Client, TestCase
 from parameterized import parameterized
+
+from catalog import models
 
 
 class StaticURLTests(TestCase):
@@ -54,6 +55,12 @@ class ModelTests(TestCase):
             name="Тест тег",
             slug="tag-test-slug"
         )
+
+    def tearDown(self) -> None:
+        super().tearDown()
+        models.Item.objects.filter(
+            name=self.item.name
+        ).delete()
 
     @parameterized.expand([
         ("1", exceptions.ValidationError),

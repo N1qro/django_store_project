@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
-import json
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,34 +20,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-try:
-    with open(".env/settings.json") as json_file:
-        SECRETS = json.load(json_file)
-
-    SECRET_KEY = SECRETS["SECRET_KEY"]
-    DEBUG = SECRETS["DEBUG"]
-    ALLOWED_HOSTS = SECRETS["ALLOWED_HOSTS"]
-except FileNotFoundError:
-    raise FileNotFoundError("settings.json file is not found in .env folder")
-except KeyError:
-    raise KeyError(
-        "Some entries in settings.json file are missing. Fill them in please."
-    )
-
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = bool(os.getenv("DEBUG"))
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS").split(",")
 
 # Application definition
 
 INSTALLED_APPS = [
     # Пока что неиспользованные, но уже зарегистрированные приложения.
-    # "catalog.apps.CatalogConfig",
-    # "homepage.apps.HomepageConfig",
-    # "about.apps.AboutConfig",
+    "catalog.apps.CatalogConfig",
+    "homepage.apps.HomepageConfig",
+    "about.apps.AboutConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
@@ -58,7 +48,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+INTERNAL_IPS = ["127.0.0.1"]
 
 ROOT_URLCONF = "lyceum.urls"
 

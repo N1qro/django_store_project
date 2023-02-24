@@ -3,8 +3,12 @@
 import os
 import sys
 
+import dotenv
+
 
 def main():
+    dotenv.read_dotenv(override=True)
+
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lyceum.settings")
     try:

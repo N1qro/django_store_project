@@ -4,13 +4,13 @@
 
 > 1. Перед первым запуском создаём окружение через ***"env-creator.bat"***
 
-> 2. В папке .env нужно дополнительно создать файл settings.json и заполнить соответственно:
+> 2. Файл **.env** в папке **/lyceum** заполнить соответственно:
 ```
-{
-    "SECRET_KEY": "Ключ сюда",
-    "DEBUG": true,
-    "ALLOWED_HOSTS": []
-}
+ALLOWED_HOSTS = Хост1, Хост2, ...
+INTERNAL_IPS = IP1, IP2, ...
+DEBUG = <True/False>
+ENABLE_COFFEE_MIDDLEWARE = <True/False>
+SECRET_KEY = "..."
 ```
 
 > 3. Для запуска сервера открыть ***"server-starter.bat"*** в папке проекта

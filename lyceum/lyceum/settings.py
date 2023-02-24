@@ -13,6 +13,7 @@ INSTALLED_APPS = [
     "catalog.apps.CatalogConfig",
     "homepage.apps.HomepageConfig",
     "about.apps.AboutConfig",
+    "core.apps.CoreConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -80,7 +81,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 
 TIME_ZONE = "UTC"
 

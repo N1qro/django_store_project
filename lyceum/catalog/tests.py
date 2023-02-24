@@ -1,5 +1,8 @@
+from django.core import exceptions
 from django.test import Client, TestCase
 from parameterized import parameterized
+
+from catalog import models
 
 
 class StaticURLTests(TestCase):
@@ -33,3 +36,62 @@ class StaticURLTests(TestCase):
         client = Client()
         response = client.get(f"/catalog/re/{test_input}")
         self.assertEqual(response.status_code, expected)
+
+
+class ModelTests(TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        super().setUpClass()
+
+        cls.category = models.Category.objects.create(
+            is_published=True,
+            name="Тест категория",
+            slug="category-test-slug",
+            weight=100,
+        )
+
+        cls.tag = models.Tag.objects.create(
+            is_published=True,
+            name="Тест тег",
+            slug="tag-test-slug"
+        )
+
+    def tearDown(self) -> None:
+        super().tearDown()
+        models.Item.objects.filter(
+            name=self.item.name
+        ).delete()
+
+    @parameterized.expand([
+        ("1", exceptions.ValidationError),
+        ("Описание без нужных слов", exceptions.ValidationError)
+    ])
+    def test_validators(self, text, excepted_exception):
+        item_count = models.Item.objects.count()
+        with self.assertRaises(excepted_exception):
+            self.item = models.Item(
+                name="Тест товар",
+                category=self.category,
+                text=text
+            )
+            self.item.full_clean()
+            self.item.save()
+            self.item.tags.add(self.tag)
+            self.item.save()
+
+        self.assertEqual(models.Item.objects.count(), item_count)
+
+    def test_item_creation(self):
+        item_count = models.Item.objects.count()
+
+        self.item = models.Item(
+            name="Тестовое имя товара 1",
+            category=self.category,
+            text="Хорошее, длинное описание. Роскошно"
+        )
+        self.item.full_clean()
+        self.item.save()
+        self.item.tags.add(self.tag)
+        self.item.save()
+
+        self.assertEqual(models.Item.objects.count(), item_count + 1)

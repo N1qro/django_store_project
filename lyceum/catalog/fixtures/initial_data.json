@@ -1,0 +1,147 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Одежда",
+        "is_published": true,
+        "slug": "clothing",
+        "weight": 100
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Спорт",
+        "is_published": true,
+        "slug": "sport",
+        "weight": 100
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Мечи",
+        "is_published": true,
+        "slug": "swords",
+        "weight": 100
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 1,
+    "fields": {
+        "name": "Экипировка",
+        "is_published": true,
+        "slug": "equipment"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 2,
+    "fields": {
+        "name": "Аксессуар",
+        "is_published": true,
+        "slug": "accessory"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 3,
+    "fields": {
+        "name": "Для бега",
+        "is_published": true,
+        "slug": "runner"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 4,
+    "fields": {
+        "name": "Для спортзала",
+        "is_published": true,
+        "slug": "gym"
+    }
+},
+{
+    "model": "catalog.tag",
+    "pk": 5,
+    "fields": {
+        "name": "Фитнес",
+        "is_published": true,
+        "slug": "fitness"
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 1,
+    "fields": {
+        "name": "Перчатка Таноса",
+        "is_published": true,
+        "text": "Вместе с ней любые веса в качалке вам будут не по чём. Продаётся без камней бесконечности. Выглядит роскошно!",
+        "category": 1,
+        "tags": [
+            1,
+            4,
+            5
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 2,
+    "fields": {
+        "name": "Меч Кирито",
+        "is_published": true,
+        "text": "Эксклюзивный в своём роде, оригинал. Был получен путём отцифровки игровой модели и создания точной копии из чёрного вольфрама, что придаёт мечу превосходно тяжёлую и прочную форму. Если Кирито смог, то и вы сможете!",
+        "category": 3,
+        "tags": [
+            1
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 3,
+    "fields": {
+        "name": "Рапира Асуны",
+        "is_published": true,
+        "text": "Точная отцифрованная и превосходно воплощенная в реальность копия рапиры Асуны. Сделана из чистого серебра. Лёгкая, прочная и самое главное - быстрая рапира. При покупке вместе с двуручным мечом Кирито будет сделана скидка 5%.",
+        "category": 3,
+        "tags": [
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 4,
+    "fields": {
+        "name": "Роба Кирито",
+        "is_published": true,
+        "text": "Ладно, не будем врать. Мы Кирито просто продаём по частям. Зато делаем это превосходно.",
+        "category": 1,
+        "tags": [
+            1
+        ]
+    }
+},
+{
+    "model": "catalog.item",
+    "pk": 5,
+    "fields": {
+        "name": "Перчатка ГГ из Atomic Heart",
+        "is_published": true,
+        "text": "Роскошно воспроизведённая реплика из недавно вышедшей игры Atomic Heart. ИИ покупается отдельно, и не у нас пожалуйста.",
+        "category": 1,
+        "tags": [
+            1,
+            2,
+            5
+        ]
+    }
+}
+]

@@ -29,6 +29,9 @@ class Category(AbstractItemDescriptorModel):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
+    def __str__(self) -> str:
+        return self.name[:15]
+
 
 class Tag(AbstractItemDescriptorModel):
     slug = models.SlugField(
@@ -40,11 +43,14 @@ class Tag(AbstractItemDescriptorModel):
         verbose_name = "Тег"
         verbose_name_plural = "Теги"
 
+    def __str__(self) -> str:
+        return self.name[:15]
+
 
 class Item(AbstractItemDescriptorModel):
     text = models.TextField(
         verbose_name="Описание",
-        help_text="Опишите объект",
+        help_text="Это описание увидит пользователь. Больше конкретики",
         validators=[
             validators.MinLengthValidator(2),
             ItemDescriptionValidator,

@@ -11,11 +11,20 @@ class ItemAdmin(admin.ModelAdmin):
 
     list_editable = ("is_published",)
     list_display_links = ("name",)
+    filter_horizontal = ("tags",)
 
 
 @admin.register(catalog.models.Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = (
-        "id",
-
+        catalog.models.Category.name.field.name,
     )
+    list_display_links = ("name",)
+
+
+@admin.register(catalog.models.Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = (
+        catalog.models.Tag.name.field.name,
+    )
+    list_display_links = ("name",)

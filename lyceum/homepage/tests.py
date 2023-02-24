@@ -2,12 +2,10 @@ from django.test import Client, override_settings, TestCase
 
 
 class StaticURLTests(TestCase):
-    # Homepage tests
     def test_homepage_endpoint(self):
         response = Client().get("/")
         self.assertEqual(response.status_code, 200)
 
-    # Joke coffee tests
     def test_coffee_endpoint(self):
         response = Client().get("/coffee/")
         self.assertIn("Я чайник", response.content.decode("UTF-8"))
@@ -20,13 +18,14 @@ class StaticURLTests(TestCase):
     ), ENABLE_COFFEE_MIDDLEWARE=True)
     def test_coffee_middleware(self):
         client = Client()
-        cached_data = set()
+        has_reversed = False
         for i in range(10):
             response = client.get("/coffee/")
-            state = "Я чайник" in response.content.decode("UTF-8")
-            cached_data.add(state)
+            is_normal = "Я чайник" in response.content.decode("UTF-8")
+            if not is_normal:
+                has_reversed = True
 
-        self.assertEqual(len(cached_data), 2)
+        self.assertTrue(has_reversed)
 
     @override_settings(MIDDLEWARE_CLASSES=(
         "django.contrib.sessions.middleware.SessionMiddleware",

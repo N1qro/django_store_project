@@ -2,16 +2,18 @@ from django.conf import settings
 
 
 class ResponseReverser:
+    times_entered = 0
+
     def __init__(self, get_response) -> None:
         self.get_response = get_response
         self.enable_mid = settings.ENABLE_COFFEE_MIDDLEWARE
-        self.times_entered = 0
 
     def __call__(self, request):
         if self.enable_mid and request.path == "/coffee/":
             response = self.get_response(request)
-            self.times_entered += 1
-            if self.times_entered % 10 == 0:
+            type(self).times_entered += 1
+            if self.times_entered == 10:
+                type(self).times_entered = 0
                 response.content = self.reverse_words(response.content.split())
             return response
         else:

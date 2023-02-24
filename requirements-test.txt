@@ -1,7 +1,7 @@
 attrs==22.2.0
 colorama==0.4.6
-django_debug_toolbar==3.8.1
 iniconfig==2.0.0
+parameterized==0.8.1
 packaging==23.0
 pluggy==1.0.0
 pytest==7.2.1

@@ -7,3 +7,7 @@ def item_list(request):
 
 def item_detail(request, pk):
     return HttpResponse(f"<body>Подробнее об элементе: {pk}</body>")
+
+
+def regex_page_view(request):
+    return HttpResponse("<body>Вы ввели целое положительное число!</body>")

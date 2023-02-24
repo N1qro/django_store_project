@@ -1,7 +1,7 @@
-from django.test import Client, TestCase
-from django.core import exceptions
-from parameterized import parameterized
 from catalog import models
+from django.core import exceptions
+from django.test import Client, TestCase
+from parameterized import parameterized
 
 
 class StaticURLTests(TestCase):

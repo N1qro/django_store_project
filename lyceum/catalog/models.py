@@ -4,12 +4,15 @@ from django.core import validators
 from django.db import models
 
 
-def item_description_validator(value):
-    lower_text = value.lower()
-    if not ("превосходно" in lower_text or "роскошно" in lower_text):
-        raise exceptions.ValidationError(
-            "Описание не содержит в себе слов 'Роскошно' или 'Превосходно'"
-        )
+def item_description_validator(*words):
+    def validator(value):
+        lower_text = value.lower()
+        if not any(word.lower() in lower_text for word in words):
+            raise exceptions.ValidationError(
+                f"Описание не содержит в себе слов: '{', '.join(words)}'"
+            )
+
+    return validator
 
 
 class Category(AbstractItemDescriptorModel):
@@ -53,7 +56,7 @@ class Item(AbstractItemDescriptorModel):
         help_text="Это описание увидит пользователь. Больше конкретики",
         validators=[
             validators.MinLengthValidator(2),
-            item_description_validator,
+            item_description_validator("Роскошно", "Превосходно"),
         ],
     )
 

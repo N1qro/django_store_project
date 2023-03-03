@@ -2,17 +2,10 @@ from core.models import AbstractItemDescriptorModel
 from django.core import exceptions
 from django.core import validators
 from django.db import models
+from sorl.thumbnail import get_thumbnail
+from django.core.files.base import ContentFile
 
-
-def item_description_validator(*words):
-    def validator(value):
-        lower_text = value.lower()
-        if not any(word.lower() in lower_text for word in words):
-            raise exceptions.ValidationError(
-                f"Описание не содержит в себе слов: '{', '.join(words)}'"
-            )
-
-    return validator
+from core.models import AbstractItemDescriptorModel, SlugMixin
 
 
 class Category(AbstractItemDescriptorModel):
@@ -56,16 +49,40 @@ class Item(AbstractItemDescriptorModel):
         help_text="Это описание увидит пользователь. Больше конкретики",
         validators=[
             validators.MinLengthValidator(2),
-            item_description_validator("Роскошно", "Превосходно"),
         ],
     )
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     tags = models.ManyToManyField(Tag)
+    main_picture = models.ImageField(upload_to="item_pictures", null=True)
+    cleanup_fields = ["main_picture"]
+    cleanup_protection = True
 
     class Meta:
-        verbose_name = "Товар"
-        verbose_name_plural = "Товары"
+        verbose_name = "товар"
+        verbose_name_plural = "товары"
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            super().save(*args, **kwargs)
+            resized = get_thumbnail(self.main_picture, "300x300", crop="center")
+            print("Moved here")
+            self.main_picture.save(resized.name, ContentFile(resized.read()), False)
+        print("Saved here")
+        super().save(*args, **kwargs)
+
+    def cleanup(self):
+        self.main_picture.delete()
 
     def __str__(self) -> str:
         return self.name[:15]
+
+
+class ItemPicture(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE,
+                             related_name="item_pictures")
+    picture = models.ImageField(upload_to="item_pictures")
+
+    class Meta:
+        verbose_name = "изображение товара"
+        verbose_name_plural = "изображения товаров"

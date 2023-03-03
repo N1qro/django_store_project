@@ -1,6 +1,6 @@
 from django.core import validators
 from django.db import models
-# from sorl.thumbnail import get_thumbnail
+from tinymce.models import HTMLField
 
 from core.models import AbstractItemDescriptorModel, SlugMixin
 
@@ -32,7 +32,7 @@ class Tag(AbstractItemDescriptorModel, SlugMixin):
 
 
 class Item(AbstractItemDescriptorModel):
-    text = models.TextField(
+    text = HTMLField(
         verbose_name="Описание",
         help_text="Это описание увидит пользователь. Больше конкретики",
         validators=[

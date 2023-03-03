@@ -1,0 +1,170 @@
+[
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "name": "Одежда",
+    "is_published": true,
+    "slug": "clothing",
+    "weight": 100
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 2,
+  "fields": {
+    "name": "Аксессуары",
+    "is_published": true,
+    "slug": "accessories",
+    "weight": 100
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 3,
+  "fields": {
+    "name": "Мечи",
+    "is_published": true,
+    "slug": "swords",
+    "weight": 100
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 4,
+  "fields": {
+    "name": "Значки",
+    "is_published": true,
+    "slug": "badges",
+    "weight": 100
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 5,
+  "fields": {
+    "name": "Рюкзаки",
+    "is_published": true,
+    "slug": "backpacks",
+    "weight": 100
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 1,
+  "fields": {
+    "name": "Головной убор",
+    "is_published": true,
+    "slug": "hat"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 2,
+  "fields": {
+    "name": "Оригинальные",
+    "is_published": true,
+    "slug": "original"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 3,
+  "fields": {
+    "name": "Акриловые",
+    "is_published": true,
+    "slug": "acrylic"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 4,
+  "fields": {
+    "name": "Двуручные",
+    "is_published": true,
+    "slug": "greatswords"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 5,
+  "fields": {
+    "name": "Катаны",
+    "is_published": true,
+    "slug": "Katanas"
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 1,
+  "fields": {
+    "name": "Титановый двуручный меч",
+    "is_published": true,
+    "text": "Наитяжелейший и наимощнейший меч. Подходит для любых нужд, если вы сможете его поднять",
+    "category": 1,
+    "main_picture": "item_pictures/png-transparent-pixel-art-musical-ly-youtube-music-youtube-text-smiley-emo_CCyaW1G.png",
+    "tags": [
+      2,
+      4
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 2,
+  "fields": {
+    "name": "Шляпа",
+    "is_published": true,
+    "text": "Оригинальная шляпа. Очень удобная. 2 из 10 людей рекомендуют",
+    "category": 1,
+    "main_picture": "item_pictures/png-transparent-pixel-art-musical-ly-youtube-music-youtube-text-smiley-emo_oy6xvkg.png",
+    "tags": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 3,
+  "fields": {
+    "name": "Мерч-значок от Яндекса",
+    "is_published": true,
+    "text": "Был выпущен в 2023 году. Его никто не купил, только мы одни такие дураки. Перепродаем в 2 раза дешевле",
+    "category": 4,
+    "main_picture": "item_pictures/png-transparent-pixel-art-musical-ly-youtube-music-youtube-text-smiley-emo_2qwIRcZ.png",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 4,
+  "fields": {
+    "name": "Карбоновая катана",
+    "is_published": true,
+    "text": "Сверх лёгкая. Сверх прочная. Идеальный выбор для спортивных соревнований",
+    "category": 3,
+    "main_picture": "item_pictures/png-transparent-pixel-art-musical-ly-youtube-music-youtube-text-smiley-emo_QeGSzml.png",
+    "tags": [
+      2,
+      5
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 5,
+  "fields": {
+    "name": "Чёрная роба",
+    "is_published": true,
+    "text": "Синтетическая роба тёмного цвета. Состав неизвестен",
+    "category": 1,
+    "main_picture": "item_pictures/png-transparent-pixel-art-musical-ly-youtube-music-youtube-text-smiley-emoticon.png",
+    "tags": [
+      2
+    ]
+  }
+}
+]

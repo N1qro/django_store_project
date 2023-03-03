@@ -1,7 +1,7 @@
 from django.core import validators
+from django.core.files.base import ContentFile
 from django.db import models
 from sorl.thumbnail import get_thumbnail
-from django.core.files.base import ContentFile
 
 from core.models import AbstractItemDescriptorModel, SlugMixin
 
@@ -41,9 +41,14 @@ class Item(AbstractItemDescriptorModel):
         ],
     )
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
-    tags = models.ManyToManyField(Tag)
-    main_picture = models.ImageField(upload_to="item_pictures", null=True)
+    category = models.ForeignKey(Category,
+                                 on_delete=models.CASCADE,
+                                 null=True,
+                                 verbose_name="Категория")
+    tags = models.ManyToManyField(Tag, verbose_name="Тэги")
+    main_picture = models.ImageField(upload_to="item_pictures",
+                                     null=True,
+                                     verbose_name="Главная картинка")
     cleanup_fields = ["main_picture"]
     cleanup_protection = True
 
@@ -56,7 +61,9 @@ class Item(AbstractItemDescriptorModel):
             super().save(*args, **kwargs)
             resized = get_thumbnail(self.main_picture, "300x300", crop="center")
             print("Moved here")
-            self.main_picture.save(resized.name, ContentFile(resized.read()), False)
+            self.main_picture.save(resized.name,
+                                   ContentFile(resized.read()),
+                                   False)
         print("Saved here")
         super().save(*args, **kwargs)
 
@@ -70,8 +77,14 @@ class Item(AbstractItemDescriptorModel):
 class ItemPicture(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE,
                              related_name="item_pictures")
-    picture = models.ImageField(upload_to="item_pictures")
+    picture = models.ImageField(upload_to="item_pictures",
+                                verbose_name="Дополнительная картинка")
 
     class Meta:
         verbose_name = "изображение товара"
         verbose_name_plural = "изображения товаров"
+
+    def __str__(self):
+        l_slash_index = self.picture.name.index("/")
+        image_name = self.picture.name[l_slash_index + 1:l_slash_index + 16]
+        return f"Изображение {image_name}"

@@ -1,18 +1,35 @@
 from django.contrib import admin
 
 import catalog.models
+from .models import Item, ItemPicture
 
 
-@admin.register(catalog.models.Item)
+class ItemPictureInline(admin.TabularInline):
+    model = ItemPicture
+    extra = 1
+
+
+@admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     list_display = (
-        catalog.models.Item.name.field.name,
-        catalog.models.Item.is_published.field.name,
+        Item.name.field.name,
+        Item.is_published.field.name,
     )
-
     list_editable = ("is_published",)
     list_display_links = ("name",)
     filter_horizontal = ("tags",)
+
+    inlines = [ItemPictureInline, ]
+
+    # fieldsets = (
+    #     (_('Main'), {
+    #         'fields': ('name', 'text', 'category', 'tags', 'main_picture')
+    #     }),
+    #     (_('Advanced options'), {
+    #         'fields': ('is_published',),
+    #         'classes': ('collapse',)
+    #     }),
+    # )
 
 
 @admin.register(catalog.models.Category)

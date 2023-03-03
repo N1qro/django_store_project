@@ -1,8 +1,11 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def home(request):
-    return HttpResponse("<body>Главная</body>")
+    template = "homepage/index.html"
+    context = {}
+    return render(request, template, context)
 
 
 def joke_index(request):

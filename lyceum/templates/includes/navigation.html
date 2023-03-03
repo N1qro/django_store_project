@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a href="/" class="navbar-brand mb-0 ms-5 text-white h1">
+        <img src="https://cdn-icons-png.flaticon.com/512/1881/1881021.png" alt="" class="d-inline-block align-top" width="30" height="30">
+        AniVibes
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            {% with request.resolver_match.view_name as view_name %}
+            <a class="nav-item nav-link {% if view_name == "homepage:home" %}active{% endif %}"
+               href="{% url 'homepage:home' %}">Главная</a>
+            <a class="nav-item nav-link {% if view_name == "about:home" %}active{% endif %}"
+               href="{% url 'about:home' %}">О проекте</a>
+            <a class="nav-item nav-link {% if view_name == "catalog:home" %}active{% endif %}"
+               href="{% url 'catalog:home' %}">Список товаров</a>
+            {% endwith %}
+        </div>
+
+        <span class="navbar-text ms-auto">
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+                Лучший сайт по мнению Константина Кулакова
+            </a>
+        </span>
+    </div>
+</nav>
+

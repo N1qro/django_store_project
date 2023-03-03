@@ -1,4 +1,5 @@
 from django.core import exceptions
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
 from parameterized import parameterized
 
@@ -84,10 +85,20 @@ class ModelTests(TestCase):
     def test_item_creation(self):
         item_count = models.Item.objects.count()
 
+        test_image = SimpleUploadedFile("test_image.png",
+                                        b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR"
+                                        b"\x00\x00\x00\x01\x00\x00\x00\x01\x08"
+                                        b"\x02\x00\x00\x00\x90s\xdb\xee\x00\x00"
+                                        b"\x00\x06PLTE\xff\xff\xff\xff\xff\xff"
+                                        b"\x00\x00\x00\x04IDATx\x9c\xec\xff\x0f"
+                                        b"\x00\x01\x01\x01\x01\x00\x9a\x18\xbf"
+                                        b"\x00\x00\x00\x00IEND\xaeB`\x82")
+
         self.item = models.Item(
             name="Тестовое имя товара 1",
             category=self.category,
-            text="Хорошее, длинное описание. Роскошно"
+            text="Хорошее, длинное описание. Роскошно",
+            main_picture=test_image,
         )
         self.item.full_clean()
         self.item.save()
@@ -95,3 +106,4 @@ class ModelTests(TestCase):
         self.item.save()
 
         self.assertEqual(models.Item.objects.count(), item_count + 1)
+        self.item.main_picture.delete(True)

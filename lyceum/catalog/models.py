@@ -1,7 +1,6 @@
 from django.core import validators
-from django.core.files.base import ContentFile
 from django.db import models
-from sorl.thumbnail import get_thumbnail
+# from sorl.thumbnail import get_thumbnail
 
 from core.models import AbstractItemDescriptorModel, SlugMixin
 
@@ -59,12 +58,12 @@ class Item(AbstractItemDescriptorModel):
     def save(self, *args, **kwargs):
         if not self.id:
             super().save(*args, **kwargs)
-            resized = get_thumbnail(self.main_picture, "300x300", crop="center")
-            print("Moved here")
-            self.main_picture.save(resized.name,
-                                   ContentFile(resized.read()),
-                                   False)
-        print("Saved here")
+            # resized = get_thumbnail(self.main_picture,
+            #                         "300x300",
+            #                         crop="center")
+            # self.main_picture.save(self.main_picture.path,
+            #                        resized.read(),
+            #                        False)
         super().save(*args, **kwargs)
 
     def cleanup(self):
